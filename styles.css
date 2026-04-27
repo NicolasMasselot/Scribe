@@ -1,0 +1,88 @@
+.selection-translator-overlay {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.selection-translator-overlay {
+  position: absolute;
+  z-index: 2147483647;
+  box-sizing: border-box;
+  max-width: calc(100vw - 16px);
+  margin: 0;
+  padding: 8px 12px;
+  border: 1px solid rgb(148 163 184 / 22%);
+  border-radius: 12px;
+  background: rgb(255 255 255 / 94%);
+  color: #111827;
+  box-shadow: 0 18px 45px rgb(15 23 42 / 18%), 0 2px 8px rgb(15 23 42 / 10%);
+  pointer-events: none;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  overflow: hidden;
+  line-height: 1.45;
+  opacity: 0;
+  backdrop-filter: blur(16px);
+  animation: selection-translator-fade-in 140ms ease-out forwards;
+  contain: layout style;
+}
+
+.selection-translator-overlay[data-state="loading"] {
+  color: #475569;
+}
+
+.selection-translator-overlay[data-state="error"] {
+  border-color: rgb(248 113 113 / 28%);
+  background: rgb(255 255 255 / 96%);
+  color: #b91c1c;
+}
+
+.selection-translator-overlay[data-multiline="true"] {
+  padding: 10px 14px;
+}
+
+.selection-translator-overlay[data-long="true"] {
+  max-height: min(320px, calc(100vh - 24px));
+  overflow: auto;
+  pointer-events: auto;
+  scrollbar-width: thin;
+}
+
+.selection-translator-overlay[data-long="true"]::-webkit-scrollbar {
+  width: 8px;
+}
+
+.selection-translator-overlay[data-long="true"]::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgb(148 163 184 / 45%);
+}
+
+@media (prefers-color-scheme: dark) {
+  .selection-translator-overlay {
+    border-color: rgb(255 255 255 / 12%);
+    background: rgb(17 24 39 / 92%);
+    color: #f8fafc;
+    box-shadow: 0 18px 45px rgb(0 0 0 / 34%), 0 2px 8px rgb(0 0 0 / 28%);
+  }
+
+  .selection-translator-overlay[data-state="loading"] {
+    color: #cbd5e1;
+  }
+
+  .selection-translator-overlay[data-state="error"] {
+    border-color: rgb(248 113 113 / 32%);
+    background: rgb(30 41 59 / 94%);
+    color: #fecaca;
+  }
+
+}
+
+@keyframes selection-translator-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(2px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

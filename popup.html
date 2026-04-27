@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Scribe</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <main class="popup-shell">
+      <header class="hero">
+        <img class="brand-logo" src="assets/scribe-logo.png" alt="" width="38" height="38">
+        <div>
+          <h1>Scribe</h1>
+          <p>Select text on a page, then use the shortcut to translate it. Nothing appears until you press the shortcut.</p>
+        </div>
+      </header>
+
+      <section class="section">
+        <label for="target-language">Target language</label>
+        <select id="target-language">
+          <option value="">Chrome language</option>
+          <option value="ar">Arabic</option>
+          <option value="bg">Bulgarian</option>
+          <option value="bn">Bengali</option>
+          <option value="cs">Czech</option>
+          <option value="da">Danish</option>
+          <option value="de">German</option>
+          <option value="el">Greek</option>
+          <option value="en">English</option>
+          <option value="es">Spanish</option>
+          <option value="fi">Finnish</option>
+          <option value="fr">French</option>
+          <option value="hi">Hindi</option>
+          <option value="hr">Croatian</option>
+          <option value="hu">Hungarian</option>
+          <option value="id">Indonesian</option>
+          <option value="it">Italian</option>
+          <option value="iw">Hebrew</option>
+          <option value="ja">Japanese</option>
+          <option value="kn">Kannada</option>
+          <option value="ko">Korean</option>
+          <option value="lt">Lithuanian</option>
+          <option value="mr">Marathi</option>
+          <option value="nl">Dutch</option>
+          <option value="no">Norwegian</option>
+          <option value="pl">Polish</option>
+          <option value="pt">Portuguese</option>
+          <option value="ro">Romanian</option>
+          <option value="ru">Russian</option>
+          <option value="sk">Slovak</option>
+          <option value="sl">Slovenian</option>
+          <option value="sv">Swedish</option>
+          <option value="ta">Tamil</option>
+          <option value="te">Telugu</option>
+          <option value="th">Thai</option>
+          <option value="tr">Turkish</option>
+          <option value="uk">Ukrainian</option>
+          <option value="vi">Vietnamese</option>
+          <option value="zh">Chinese</option>
+          <option value="zh-Hant">Chinese Traditional</option>
+        </select>
+        <p id="status" role="status"></p>
+      </section>
+
+      <section class="shortcut">
+        <div>
+          <span class="label">Shortcut</span>
+          <span id="shortcut-value" class="shortcut-value">Alt Shift T</span>
+        </div>
+        <button id="open-shortcuts" type="button">Change</button>
+      </section>
+    </main>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
