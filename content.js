@@ -62,6 +62,10 @@ async function translateSelection() {
     return;
   }
 
+  if (overlay && selectedText === lastSelectionText) {
+    return;
+  }
+
   const range = selection.getRangeAt(0);
   const geometry = getSelectionGeometry(range);
 
