@@ -4,6 +4,16 @@ Chrome extension that translates selected page text into a temporary overlay wit
 
 ![Scribe extension popup](docs/assets/scribe-popup.png)
 
+## In Use
+
+Select text on the page:
+
+![Selected text before translation](docs/assets/scribe-selection.png)
+
+Trigger Scribe to show the translation in place:
+
+![Scribe translation overlay](docs/assets/scribe-overlay.png)
+
 ## Why
 
 Reading foreign-language pages often breaks flow: copy text, switch tabs, paste it into a translator, then come back. Scribe keeps the interaction on the page by translating only the selected text when the user asks for it.
