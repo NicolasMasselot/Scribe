@@ -22,13 +22,13 @@ Reading foreign-language pages often breaks flow: copy text, switch tabs, paste 
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/NicolasMasselot/scribe-translator.git
+git clone https://github.com/NicolasMasselot/Scribe.git
 ```
 
 2. Open `chrome://extensions`.
 3. Enable Developer mode.
 4. Click Load unpacked.
-5. Select the cloned `scribe-translator` folder.
+5. Select the cloned `Scribe` folder.
 6. Open the Scribe popup and choose a target language.
 7. Select text on an `http` or `https` page and press `Alt+Shift+T`.
 
