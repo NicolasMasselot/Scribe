@@ -1,52 +1,61 @@
 # Scribe
 
-Chrome Manifest V3 extension that translates selected web page text into a temporary visual overlay. The page DOM is not changed; the original text remains underneath and the overlay disappears when the selection is cleared or Escape is pressed.
+Chrome extension that translates selected page text into a temporary overlay without rewriting the page.
 
-## Load Unpacked
+![Scribe extension popup](docs/assets/scribe-popup.png)
 
-1. Open `chrome://extensions`.
-2. Enable Developer mode.
-3. Click Load unpacked.
-4. Select this `selection-translator` folder.
+## Why
 
-## Configure Target Language
+Reading foreign-language pages often breaks flow: copy text, switch tabs, paste it into a translator, then come back. Scribe keeps the interaction on the page by translating only the selected text when the user asks for it.
 
-1. Click the Scribe extension icon.
-2. Choose a target language in the popup.
+## What It Does
 
-The selected language is stored in `chrome.storage.sync`. If no language is selected, the extension uses Chrome's UI language.
+- Adds a keyboard shortcut for translating the current selection.
+- Displays the translation near the selected text in a temporary overlay.
+- Leaves the original page DOM unchanged.
+- Lets the user choose a target language from the extension popup.
+- Stores settings with `chrome.storage.sync`.
+- Uses Chrome's local Translator and Language Detector APIs when available.
 
-## Use
+## Use It
 
-1. Select text on a regular `http` or `https` page.
-2. Use the keyboard shortcut shown in the popup.
-3. The translation appears near the selected text.
-4. Press Escape or clear the selection to remove it.
+1. Clone the repository:
 
-The shortcut can be changed from the popup or at `chrome://extensions/shortcuts`.
+```bash
+git clone https://github.com/NicolasMasselot/scribe-translator.git
+```
 
-## Current Limitations
+2. Open `chrome://extensions`.
+3. Enable Developer mode.
+4. Click Load unpacked.
+5. Select the cloned `scribe-translator` folder.
+6. Open the Scribe popup and choose a target language.
+7. Select text on an `http` or `https` page and press `Alt+Shift+T`.
 
-- Requires Chrome 138+ for the local Translator and Language Detector APIs.
-- If local translation is unavailable, the overlay reports that translation is unavailable.
-- No remote translation backend is included.
-- Regular document selections only; textareas, inputs, iframes, shadow DOM, PDFs, Chrome Web Store pages, and `chrome://` pages are not supported.
-- Long translations are shown in a constrained scrollable overlay.
+The shortcut can be changed from the popup or from `chrome://extensions/shortcuts`.
+
+## Stack
+
+- Chrome Manifest V3
+- JavaScript, HTML, and CSS
+- Chrome extension APIs: `activeTab`, `scripting`, `storage`, `commands`
+- Chrome local Translator and Language Detector APIs
+
+## Privacy Model
+
+Scribe has no remote translation backend in this version. When Chrome's local translation APIs are available, selected text stays on device. If local translation is unavailable, the extension shows an unavailable state instead of sending text elsewhere.
+
+## Project Structure
+
+- `manifest.json` defines the MV3 extension, popup, options page, icons, permissions, and keyboard command.
+- `background.js` listens for the keyboard shortcut and injects the translation flow into the active tab.
+- `content.js` reads the selection, validates it, manages overlay lifecycle, and renders the result.
+- `translator.js` wraps the local Chrome translation provider and fallback behavior.
+- `popup.html`, `popup.css`, and `popup.js` provide language selection and shortcut access.
+- `options.html` and `options.js` provide a simple fallback options page.
+
+## Current Limits
+
+- Requires Chrome 138+ for local translation support.
+- Regular document selections only; textareas, inputs, iframes, shadow DOM, PDFs, Chrome Web Store pages, and `chrome://` pages are out of scope.
 - Multi-line selection positioning is approximate.
-
-## Architecture
-
-- `manifest.json` defines the MV3 extension, command, popup, options page, icons, and permissions: `activeTab`, `scripting`, and `storage`.
-- `background.js` handles the keyboard command and asks the active tab to translate the current selection.
-- `content.js` reads the current selection, validates selection text, manages overlay lifecycle, and calls the translation service.
-- `translator.js` exposes a small provider interface with a Chrome local provider and an unavailable fallback provider. Selected text stays on device in V1.
-- `popup.html`, `popup.css`, and `popup.js` provide Scribe onboarding, target-language selection, and shortcut access.
-- `options.html` and `options.js` remain as a simple fallback options page.
-
-## V2 Candidates
-
-- Better support for multi-line overlays, iframes, shadow DOM, and editable fields.
-- Optional explicit remote provider architecture with clear privacy controls.
-- Better language-pair availability messaging.
-- Manual source-language override.
-- Small integration test page and browser automation checks.
